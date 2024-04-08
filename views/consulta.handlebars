@@ -1,0 +1,35 @@
+<h1>Tela de Consulta</h1>
+
+<a href="/">
+    Cadastrar um Cliente
+</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each agendamentos}}
+            {{#dataValues}}
+                <tr>
+                    <td>{{nome}}</td>
+                    <td>{{endereco}}</td>
+                    <td>
+                        <form id="form{{id}}" action="/deletar/{{id}}" method="POST">
+                            <button class="btn btn-primary" type="button" onclick="editar({{id}})">
+                                Editar
+                            </button>    
+                            <button class="btn btn-danger"type="button" onclick="deletar({{id}})">
+                                Deletar
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            {{/dataValues}}
+        {{/each}}
+    </tbody>
+</table>

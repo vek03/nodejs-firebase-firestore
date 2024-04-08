@@ -1,0 +1,39 @@
+<h1>Tela de Edição</h1>
+
+<a href="/consulta">
+    Listar Clientes
+</a>
+
+<form action="/editar/{{agendamento.id}}" method="POST">
+    <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="text" class="form-control" name="nome" required id="nome" placeholder="Digite o nome" value="{{agendamento.nome}}">
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="endereco">Endereço:</label>
+        <input type="text" class="form-control"  name="endereco"  required id="endereco" placeholder="Digite o endereço" value="{{agendamento.endereco}}">
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="bairro">Bairro:</label>
+        <input type="text" class="form-control" name="bairro"  required  id="bairro" placeholder="Digite o bairro" value="{{agendamento.bairro}}">
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="cep">CEP:</label>
+        <input type="text" class="form-control" name="cep"  required  id="cep" placeholder="Digite o CEP" value="{{agendamento.cep}}">
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="cidade">Cidade:</label>
+        <input type="text" class="form-control" name="cidade"  required  id="cidade" placeholder="Digite a cidade" value="{{agendamento.cidade}}">
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="estado">Estado:</label>
+        <input type="text" class="form-control"  name="estado" required  id="estado" placeholder="Digite o estado" value="{{agendamento.estado}}">
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary">Editar</button>
+</form>
