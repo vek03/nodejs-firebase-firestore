@@ -3,8 +3,19 @@ const express = require("express");
 const bodyParser = require('body-parser');
 const {allowInsecurePrototypeAccess,} = require("@handlebars/allow-prototype-access");
 const Handlebars = require("handlebars");
-var Agendamento = require(__dirname + '/models/Agendamento.js');
+//var Agendamento = require(__dirname + '/models/Agendamento.js');
 const handlebars = require("express-handlebars").engine;
+const { initializeApp, applicationDefault, cert } = require('firebase-admin/app')
+const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore')
+
+var admin = require("./server/key/admin.json");
+
+initializeApp({
+    credential: cert(admin)
+})
+
+const db = getFirestore()
+
 
 //Iniciando Bibliotecas
 const app = express();
@@ -33,80 +44,48 @@ app.set("view engine", "handlebars");
 //ROTAS
 //INDEX
 app.get("/", (req, res) => {
-    res.render("cadastro");
+    res.render("primeira_pagina");
 })
+
 
 //CREATE
 app.post("/cadastrar", async (req, res) => {
-    Agendamento.create(req.body).then(function(agendamento)
-    {
-        console.log('Agendamento Cadastrado com Sucesso');
-        res.redirect('/consulta');
-    }).catch(function(error){
-        console.log('Erro ao Cadastrar Agendamento');
-        res.redirect('/');
-    });
+    var result = db.collection('agendamentos').add({
+        nome: req.body.nome,
+        telefone: req.body.telefone,
+        origem: req.body.origem,
+        data_contato: req.body.data_contato,
+        observacao: req.body.observacao
+    }).then(function(){
+        console.log('Added document');
+        res.redirect('/')
+    })
 })
 
 
 
 //READ
 app.get("/consulta", async (req, res) => {
-    Agendamento.findAll().then(function(agendamentos)
-    {
-        res.render("consulta", { agendamentos: agendamentos });
-    }).catch(function(error){
-        console.log('Erro ao Buscar Agendamentos');
-        res.redirect('/');
-    });
+    
 })
 
 
 
 //EDITAR
 app.get("/editar/:id", async (req, res) => {
-    Agendamento.findByPk(req.params.id).then(function(agendamento)
-    {
-        res.render("editar", { agendamento: agendamento });
-    }).catch(function(error){
-        console.log('Erro ao Buscar Agendamento');
-        res.redirect('/consulta');
-    });
+    
 })
 
 //UPDATE
 app.post("/editar/:id", async (req, res) => {
-    Agendamento.findByPk(req.params.id).then(async function(agendamento)
-    {
-        await agendamento.update(
-            req.body,
-            {
-              where: {
-                id: agendamento.id,
-              },
-            }
-          ); 
-
-        console.log('Agendamento Atualizado com Sucesso');
-        res.redirect("/consulta");
-    }).catch(function(error){
-        console.log('Erro ao Atualizar Agendamento');
-        res.redirect('/consulta');
-    });
+    
 })
 
 
 
 //DELETE
 app.post("/deletar/:id", async (req, res) => {
-    Agendamento.findByPk(req.params.id).then(function(agendamento)
-    {
-        agendamento.destroy();
-        res.redirect('/consulta');
-    }).catch(function(error){
-        console.log('Erro ao Deletar Agendamento');
-        res.redirect('/consulta');
-    });
+    
 })
 
 
