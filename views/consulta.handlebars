@@ -1,35 +1,75 @@
-<h1>Tela de Consulta</h1>
-
-<a href="/">
-    Cadastrar um Cliente
-</a>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Nome</th>
-            <th>Telefone</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{#each agendamentos}}
-            {{#dataValues}}
-                <tr>
-                    <td>{{nome}}</td>
-                    <td>{{endereco}}</td>
-                    <td>
-                        <form id="form{{id}}" action="/deletar/{{id}}" method="POST">
-                            <button class="btn btn-primary" type="button" onclick="editar({{id}})">
-                                Editar
-                            </button>    
-                            <button class="btn btn-danger"type="button" onclick="deletar({{id}})">
-                                Deletar
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-            {{/dataValues}}
-        {{/each}}
-    </tbody>
-</table>
+<div class="container text-center">
+    <div class="row">
+        <div class="col-1">
+            &nbsp;
+        </div>
+        <div class="col bg-primary">
+            <nav class="navbar bg-primary navbar-expand-lg" data-bs-theme="dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">SISTEMA WEB</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                            <a class="nav-link" aria-current="page" href="/">Cadastrar</a>
+                            <a class="nav-link active" href="#">Consultar</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="col-1">
+            &nbsp;
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1">
+            &nbsp;
+        </div>
+        <div class="col bg-white">
+            &nbsp;
+        </div>
+        <div class="col-1">
+            &nbsp;
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1">
+            &nbsp;
+        </div>
+        <div class="col bg-white">
+            <p class="text-start fs-5">Consultar - Agendamentos de Potenciais Clientes</p>
+            <p class="text-start fs-6">Sistema Utilizado para agendamento de serviços.</p>
+            <p>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Telefone</th>
+                            <th scope="col">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each agendamentos}}
+                        <tr>
+                            <th scope="row">{{@index}}</th>
+                            <td>{{this.nome}}</td>
+                            <td>{{this.telefone}}</td>
+                            <td>
+                                <a href="/editar/{{this.key}}" class="btn btn-outline-primary">Editar</a>
+                                
+                                <button type="button" onclick="confirmDelete('{{this.key}}')" class="btn btn-outline-danger">Excluir</button>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </p>
+        </div>
+        <div class="col-1">
+            &nbsp;
+        </div>
+    </div>
+</div>
