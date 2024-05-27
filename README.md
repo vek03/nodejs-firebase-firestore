@@ -5,7 +5,7 @@ O projeto ainda está finalizado:
 - [x] Front-End
 - [x] CREATE
 - [x] READ
-- [ ] UPDATE
+- [x] UPDATE
 - [x] DELETE
 
 > Projeto CRUD com Firebase FireStore em Node.js e Handlebars
