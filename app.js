@@ -121,7 +121,7 @@ app.get("/editar/:id", async (req, res) => {
             return res.redirect('/consulta')
         }
         
-        return res.render("editar", {agendamento: agendamento.data()})
+        return res.render("editar", {agendamento: agendamento.data(), id: id})
     }catch(error){
         console.log('Error getting documents:', error);
         req.session.error = 'Ocorreu um Erro ao Visualizar o Cliente!';
